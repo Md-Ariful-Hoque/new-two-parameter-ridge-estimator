@@ -1,4 +1,15 @@
-Table 1 style outputs
-Table 2 outlier outputs
-Figure 1 plots
-real-data result tables
+# Create tables and plots
+
+library(ggplot2)
+
+# Load results
+res <- read.csv("../results/tables/main_simulation.csv")
+
+# Plot example
+ggplot(res, aes(x = n, y = NTPR, color = as.factor(rho))) +
+  geom_line() +
+  facet_grid(p ~ sigma) +
+  theme_minimal()
+
+# Save plot
+ggsave("../results/figures/mse_plot.png")
