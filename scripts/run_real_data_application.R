@@ -1,34 +1,16 @@
-# Real data application
+library(readxl)
 
-library(car)
+source("../R/data_loading.R")
+source("../R/estimators_two_parameter.R")
 
-source("../R/estimators.R")
+data <- load_bodyfat()
 
-# Load your dataset (put in data/raw/)
-data <- read.csv("../data/raw/bodyfat.csv")
+# Adjust based on your dataset
+y <- data[[1]]
+X <- as.matrix(data[, -1])
 
-# Example model
-y <- data$y   # change to your response
-X <- as.matrix(data[, -1])  # predictors
+ols <- ols_estimator(X, y)
+ntpr <- ntpr_estimator(t(X) %*% X, ols, k = 0.1)
 
-# OLS
-ols <- solve(t(X) %*% X) %*% t(X) %*% y
-
-# Ridge parameter
-k <- 0.1
-
-ntpr <- ntpr_estimator(X, y, k)
-
-# Diagnostics
-vif_values <- vif(lm(y ~ X))
-cond_number <- kappa(X)
-
-results <- list(
-  OLS = ols,
-  NTPR = ntpr,
-  VIF = vif_values,
-  ConditionNumber = cond_number
-)
-
-saveRDS(results, "../results/saved_objects/real_data.rds")
-print(results)
+print(ols)
+print(ntpr)
