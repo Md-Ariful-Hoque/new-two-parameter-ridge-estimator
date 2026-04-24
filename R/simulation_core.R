@@ -5,25 +5,22 @@ source("R/estimators.R")
 source("R/mse_functions.R")
 
 one_replication <- function(n, p, rho, sigma) {
-  x <- generate_x(n, p, rho)
+  x 
 
   eig <- eigen(t(x) %*% x)
-  beta <- eig$vectors[, which.max(eig$values)]
-  beta <- beta / sqrt(sum(beta^2))
+  w <- eigen(X)$vectors
+  # True beta
+  b <- matrix(w[,1]) 
 
-  y <- generate_y(x, beta, sigma)
+  Z <- x %*% w
+  alpha <- t(w) %*% b
+  
+  y 
 
-  ols <- ols_estimator(x, y)
+  ols 
+  mse_ols[i] <- t(ols - alpha) %*% (ols - alpha)
 
-  k <- sum((eig$values / abs(t(eig$vectors) %*% ols))^2) *
-    (sigma^2 / max((t(eig$vectors) %*% ols)^2))
-
-  ntpr <- ntpr_estimator(x, y, k)
-
-  data.frame(
-    OLS = mse_estimator(ols, beta),
-    NTPR = mse_estimator(ntpr, beta)
-  )
+ 
 }
 
 run_simulation <- function(n, p, rho, sigma, size = 5000) {
