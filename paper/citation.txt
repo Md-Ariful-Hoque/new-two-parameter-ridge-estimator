@@ -1,1 +1,3 @@
-Hoque MA, Kibria BMG, Bursac Z. New Two-Parameter Ridge Estimators for Addressing Multicollinearity in Linear Regression: Theory, Simulation, and Applications. Stats. 2026; 9(1):15. https://doi.org/10.3390/stats9010015
+Hoque MA, Kibria BMG, Bursac Z (2025).
+New Two-Parameter Ridge Estimators for Addressing Multicollinearity in Linear Regression: Theory, Simulation, and Applications. Stats. 2026; 9(1):15. 
+https://doi.org/10.3390/stats9010015
